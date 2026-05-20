@@ -1,7 +1,12 @@
+"use client";
+import { authClient } from "@/lib/auth-client";
 import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
+  const { data: session } = authClient.useSession();
+  console.log("Session data in Navbar:", session);
+
   return (
     <nav className="flex justify-between bg-white p-5">
       <ul className="flex gap-4">
