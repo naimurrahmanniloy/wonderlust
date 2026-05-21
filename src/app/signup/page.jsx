@@ -14,6 +14,8 @@ import {
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { FaGoogle } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 const SignUpPage = () => {
   const onSubmit = async (e) => {
@@ -31,6 +33,12 @@ const SignUpPage = () => {
     if (data) {
       redirect("/");
     }
+  };
+
+  const handleGoogleSignUp = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
   };
 
   return (
@@ -111,6 +119,17 @@ const SignUpPage = () => {
             </Button>
           </div>
         </Form>
+        <hr />
+        <div>
+          <Button
+            variant="outline"
+            className="w-full rounded-none flex items-center justify-center gap-2"
+            onPress={handleGoogleSignUp}
+          >
+            <FcGoogle size={20} />
+            Sign Up with Google
+          </Button>
+        </div>
       </Card>
     </div>
   );

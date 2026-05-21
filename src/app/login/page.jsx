@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, toast } from "@heroui/react";
+import { Card, Separator, toast } from "@heroui/react";
 import React from "react";
 import { Check } from "@gravity-ui/icons";
 import {
@@ -14,6 +14,7 @@ import {
 } from "@heroui/react";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const LoginPage = () => {
   const onSubmit = async (e) => {
@@ -30,7 +31,11 @@ const LoginPage = () => {
       redirect("/");
     }
   };
-
+  const handleGoogleSignUp = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
   return (
     <div className="max-w-7xl mx-auto justify-center ">
       <div className="text-center my-3">
@@ -99,6 +104,18 @@ const LoginPage = () => {
             </Button>
           </div>
         </Form>
+        <Separator></Separator>
+
+        <div>
+          <Button
+            variant="outline"
+            className="w-full rounded-none flex items-center justify-center gap-2"
+            onPress={handleGoogleSignUp}
+          >
+            <FcGoogle size={20} />
+            Sign Up with Google
+          </Button>
+        </div>
       </Card>
     </div>
   );
